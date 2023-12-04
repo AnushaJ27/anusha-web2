@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Online Magazine</title>
+  <style>
+    /* CSS Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+    }
+
+    main {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .magazine {
+      width: 200px;
+      border: 1px solid #ccc;
+      margin: 10px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    footer {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Online Magazine</h1>
+    <form id="search-form">
+      <input type="text" id="search-input" placeholder="Search">
+      <input type="submit" value="Search">
+    </form>
+  </header>
+
+  <main>
+    <div id="magazine-container"></div>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Online Magazine. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // JavaScript Code
+    const magazines = [
+      {
+        title: "Fashion Magazine",
+        image: "https://example.com/fashion-magazine.jpg"
+      },
+      {
+        title: "Sports Magazine",
+        image: "https://example.com/sports-magazine.jpg"
+      },
+      {
+        title: "Technology Magazine",
+        image: "https://example.com/technology-magazine.jpg"
+      },
+      // Add more magazines here...
+    ];
+
+    const magazineContainer = document.getElementById("magazine-container");
+    const searchForm = document.getElementById("search-form");
+
+    // Render magazines
+    function renderMagazines() {
+      magazineContainer.innerHTML = "";
+
+      const searchTerm = searchForm.elements["search-input"].value.toLowerCase();
+
+      magazines.forEach(magazine => {
+        const magazineElement = document.createElement("div");
+        magazineElement.classList.add("magazine");
+
+        const imageElement = document.createElement("img");
+        imageElement.src = magazine.image;
+        imageElement.alt = magazine.title;
+        imageElement.style.width = "150px";
+        imageElement.style.height = "150px";
+
+        const titleElement = document.createElement("h3");
+        titleElement.textContent = magazine.title;
+
+        const addButton = document.createElement("button");
+        addButton.textContent = "Add to Cart";
+        addButton.addEventListener("click", function() {
+          addToCart(magazine.title);
+        });
+
+        magazineElement.appendChild(imageElement);
+        magazineElement.appendChild(titleElement);
+        magazineElement.appendChild(addButton);
+
+        magazineContainer.appendChild(magazineElement);
+      });
+    }
+
+    // Add magazine to cart
+    function addToCart(title) {
+      console.log(`Added "${title}" to the cart.`);
+      // Implement your cart functionality here.
+    }
+
+    // Event listeners
+    searchForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+      renderMagazines();
+    });
+
+    // Initial render
+    renderMagazines();
+  </script>
+</body>
+</html>
